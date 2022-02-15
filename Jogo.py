@@ -504,3 +504,5 @@ if r_missao == 2:
     print('Pelo seu olhar o Velho viado já sabe oque você fez\n'
           'Apesar dele parecer uma múmia ele não nasceu ontem!!'
           '\nQuando você abre a boca pra falar o Prevtori avança em sua direção!!')
+
+# Ultima linha!
