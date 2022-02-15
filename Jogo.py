@@ -105,7 +105,7 @@ def luta_facil(drop):
         print('Você Perdeu!, o número era ' + str(numa))
         return 2
     else:
-        print('Você ganhou! Acabou com a raça desse Viadinho.')
+        print('Você ganhou!')
         return 1
 
 def luta_impo(drop):
@@ -292,6 +292,7 @@ def final_alt():
 
 def missao(local_zero):
     drop = 0
+    completo = False
     if local_zero == caminhos[0]:
  # Rua Deserta
         completo = False
@@ -391,22 +392,6 @@ def missao(local_zero):
         if indecisao >= 4:
             print('Você se sente perdido e quando se da conta você acorda morto')
             morte()
-        elif completo == True:
-            print('Você volta correndo pra devolver aquela merda pro velho broxa!!\n'
-                  'mas Lembra que ele te pediu para não ler o diario... eai meu parceiro?\n'
-                  'Vai escutar aquela quenga velha ou vai ser um pau no cu?\n'
-                  '1- Amarelar igual uma bicha, escutar o Velho Corno e ficar na curiosidade\n'
-                  '2- Ser um Pau no cu do Caralho e ler os segredos obscuros do Prev "Rola-murcha" tori?')
-            diario = int(input('Digite 1 ou 2:\n '))
-            if diario == 1:
-                print('Você decide ser uma boa moça e seguir com a missão à risca! (com crase ein)')
-                return 1
-            elif diario == 2:
-                print('-Aquele Velho baitola não manda nem na mulher dele vai mandar em mim?\n'
-                      'Você descobre que o Velho era um cara que apareceu perdido aqui muito tempo atrás\n'
-                      'e que com o tempo foi perdendo a memoria e do nada decidiu que iria se chamar Prevtori!!\n\n'
-                      'Que parada zoada ein... quem inventou essa merda??')
-                return 2
     if local_zero == caminhos[1]:
 # Ponte
         print('Você recebe a missão de Prevtori que te pede para procurar nos Carros o seu velho diario...')
@@ -423,11 +408,19 @@ def missao(local_zero):
             car = int(input('1- Marea preto\n'
                             '2- Pegeout prata\n'
                             '3- Fusca Azul\n'
-                            '4- Hilux Vermelha\n'
+                            '4- Camaro Vermelha\n'
                             '5- Brasília Amarela\n:  '))
-
-            if carro1 == True or carro2 == True or carro3 == True or carro4 == True or carro5 == True:
-               print('Não tem mais o que ver ali.')
+            if car == 4 and carro4 == True:
+                completo = True
+                break
+            elif car == 1 and carro1 == True:
+                print('Não tem mais o que ver ali além de um marea sendo um marea.')
+            elif car == 2 and carro2 == True:
+                print('Não tem mais o que ver ali, vai que você realmente adquire um pegeout?')
+            elif car == 3 and carro3 == True:
+                print('Não tem mais o que ver ali, o Fusca Azul gera agressão involuntaria')
+            elif car == 5 and carro5 == True:
+                print('Não tem mais o que ver ali.')
             if car == 1 and carro1 == False:
                 print('Você se aproxima do Marea com cuidado, ele parece estranho e o risco de combustão espontanêa é real!')
                 car1 = int(input('Você quer correr o risco?\n1- Sim, eu tô maluco biluteteia biruta da cabeça\n'
@@ -442,8 +435,8 @@ def missao(local_zero):
                           'o Marea explodiu como de costume e você agradece por esta a uma distancia segura!')
                     carro1 = True
             if car == 2 and carro2 == False:
-                print('Você se aproxima do Pegeout e começa a sentir o perigo de adquirir um deles'
-                      'Você agradece por não ter a sua carteira com você pra nem correr o risco.')
+                print('Você se aproxima do Pegeout e começa a sentir o perigo de adquirir um deles\n'
+                      'Você agradece por não ter a sua carteira com você pra nem correr o risco de comprar.')
                 print('Dentro dele você vê o que uma alma penada, talvez condenada a ficar aqui até vender o carro!')
                 ajud = int(input('Você quer tentar ajudar a alma artomentada?\n1- Sim, ninguém merece um carro assim, '
                       'vamos tentar da a segunda alegria do dono de pegeout\n'
@@ -451,26 +444,50 @@ def missao(local_zero):
                 if ajud == 1:
                     print('Você se aproxima e o Fantasma ja lhe pergunta se você tem interesse no Pegeout 206 prata, 2 portas,\n'
                           'tudo funcionando, só o ar q tá meio fraco, mas nada que uma janela aberta não resolva!\n'
-                          'Você diz que quer dar uma olhada e ele te olha com os olhos marejados.\n- Obrigado ele diz e desaparece!'
+                          'Você diz que quer dar uma olhada e ele te olha com os olhos marejados.\n- Obrigado... '
+                          'Você é um Héroi! - ele diz e desaparece!\n'
                           'Ele só precisava que alguem com noção demonstrasse interesse no carro...\n'
                           'Essa foi fácil, apesar de arriscadíssimo!')
-                    print('***Você encontrou uma' + armas[1].nome + ' em baixo de um dos Pneus***')
+                    print('***Você encontrou um ' + armas[1].nome + ' em baixo de um dos Pneus***')
+                    drop += 1
                     carro2 = True
                 if ajud == 2:
-                    print('Você é um homem sensato e não deixou que um fantasma que caiu na arapuca te puxasse junto!'
-                          'você vai conseguir dormir em paz sabendo que não tem um pegeout na garagem.')
-                    carro2 = True
+                    print('Você é um homem sensato e não deixou que um fantasma que caiu na arapuca te puxasse junto!\n'
+                          'Você vai conseguir dormir em paz sabendo que não tem um pegeout na garagem.')
             if car == 3 and carro3 == False:
-                print('3')
+                print('Você se aproxima do fusca azul e um ' + monstros[alea5()].raca +
+                      ' Aparece do nada e vem te agredir gritando "Fusca Azul!", '
+                      'você não tem alternativa além de se defender!')
+                car3 = luta_facil(drop)
+                carro3 = True
+                if car3 == 1:
+                    print('Você acabou com a raça daquele corno infantil!, mas não encontra \n'
+                          'nada além de um belo fusca azul!')
+                    carro3 = True
+                if car3 == 2:
+                    print('Ele acerta o seu braço com uma força jamais vista...')
+                    morte()
             if car == 4 and carro4 == False:
-                print('4')
+                print('Você se aproxima do Camaro e pensa quem era o Playboy q dirigia ese Bumblebee vermelho...\n'
+                      'ao olhar no banco de trás você encontra um livro, mas a porta está trancada!\n'
+                      'Você precisa de alguma coisa para quebrar o vidro! ')
+                if drop >= 1:
+                    print('***Você usa o tijolo para Arrebentar o vidro do '
+                          'Camaro e consegue o Diário do velho broxa!***\n'
+                          'Vir novamente ao Camaro completará a missão!')
+                    carro4 = True
+                else:
+                    print('***Você tem que procurar em outros lugares!***')
             if car == 5 and carro5 == False:
-                print('5')
-
+                print('Você se aproxima da Brasília amarela e observa que suas portas estão abertas!\n'
+                      'Apesar dessa cena lhe parecer familiar você não encontra nada de útil nela...')
+                carro5 = True
     if local_zero == caminhos[2]:
 # Caverna
         print('Você recebe a missão de Prevtori que te pede para procurar ao redor o seu velho diario...')
         print('Você entra na ' + local_zero)
+        print('Você está num breu que não consegue nem ver oque está a sua frente!')
+        
     if local_zero == caminhos[3]:
 # Viela Escura
         print('Você recebe a missão de Prevtori que te pede para procurar nos predios ao redor o seu velho diario...')
@@ -483,11 +500,26 @@ def missao(local_zero):
 # Igreja
         print('Você recebe a missão de Prevtori que te pede para procurar ao redor o seu velho diario...')
         print('Você entra na ' + local_zero)
+    elif completo == True:
+        print('Você volta correndo pra devolver aquela merda pro velho broxa!!\n'
+              'mas Lembra que ele te pediu para não ler o diario... eai meu parceiro?\n'
+              'Vai escutar aquela quenga velha ou vai ser um pau no cu?\n'
+              '1- Amarelar igual uma bicha, escutar o Velho Corno e ficar na curiosidade\n'
+              '2- Ser um Pau no cu do Caralho e ler os segredos obscuros do Prev "Rola-murcha" tori?')
+        diario = int(input('Digite 1 ou 2:\n '))
+        if diario == 1:
+            print('Você decide ser uma boa moça e seguir com a missão à risca! (com crase ein)')
+            return 1
+        elif diario == 2:
+            print('-Aquele Velho baitola não manda nem na mulher dele vai mandar em mim?\n'
+                  'Você descobre que o Velho era um cara que apareceu perdido aqui muito tempo atrás\n'
+                  'e que com o tempo foi perdendo a memoria e do nada decidiu que iria se chamar Prevtori!!\n\n'
+                  'Que parada zoada ein... quem inventou essa merda??')
+            return 2
 
 
-
-local_zero = caminhos[alea5()]
-creep1 = monstros[alea5()].raca
+local_zero = caminhos[1]
+'''creep1 = monstros[alea5()].raca
 creep2 = monstros[alea5()].raca
 nome = tutorial()
 chefe = transicao1()
@@ -503,6 +535,7 @@ if r_missao == 1:
 if r_missao == 2:
     print('Pelo seu olhar o Velho viado já sabe oque você fez\n'
           'Apesar dele parecer uma múmia ele não nasceu ontem!!'
-          '\nQuando você abre a boca pra falar o Prevtori avança em sua direção!!')
+          '\nQuando você abre a boca pra falar o Prevtori avança em sua direção!!')'''
+missao(local_zero)
 
 # Ultima linha!
