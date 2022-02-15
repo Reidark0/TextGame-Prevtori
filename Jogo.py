@@ -486,8 +486,8 @@ def missao(local_zero):
 
 
 
-local_zero = caminhos[1]
-'''creep1 = monstros[alea5()].raca
+local_zero = caminhos[alea5()]
+creep1 = monstros[alea5()].raca
 creep2 = monstros[alea5()].raca
 nome = tutorial()
 chefe = transicao1()
@@ -503,6 +503,4 @@ if r_missao == 1:
 if r_missao == 2:
     print('Pelo seu olhar o Velho viado já sabe oque você fez\n'
           'Apesar dele parecer uma múmia ele não nasceu ontem!!'
-          '\nQuando você abre a boca pra falar o Prevtori avança em sua direção!!')'''
-missao(local_zero)
-
+          '\nQuando você abre a boca pra falar o Prevtori avança em sua direção!!')
