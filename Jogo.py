@@ -5,7 +5,9 @@ from mob import Arma
 from mob import Armadura
 from mob import Boss
 boss = Boss(Mobs('Podi', 3, 3), Mobs('Babu', 4, 4), Mobs('Lucca', 5, 5), Mobs('Gil', 6, 6))
-Prevtori = Mobs('Prevtori', 4, 15)
+Prevtori = Mobs('Prevtori', 2, 10)
+CavernaMan = Mobs('Criatura', 2, 20)
+CavernaMan_Puto = Mobs('Criatura puta da cara', 4, 25)
 monstros_easy = [
     Mobs('Babuíno', 2, 10),
     Mobs('Petista', 1, 8),
@@ -53,17 +55,18 @@ caminhos = ['Rua deserta',
             'Viela escura',
             'Mata fechada',
             'Igreja'
-]
+            ]
 mortes_jogador = ['Te Quebrou na porrada',
                   'Te partiu no meio',
                   'Te deu uma facada e saiu correndo',
                   'Mordeu sua virilha',
                   'Te bateu bem no ovo direito',
                   'Te deu um olhar 43 intankavél'
-]
+                  ]
 
 
 def morte():
+    time.sleep(1)
     tipos_morte_player = ['O cara foi solado q nem clickou kkkkkk',
                           'Foi de base, F no chat',
                           'Infelizmente não tankou e foi de berço...',
@@ -73,6 +76,7 @@ def morte():
                           'Infelizmente você não tankou a cirurgia e foi de base as 19:35',
                           'Você deu o peido mestre...']
     print(tipos_morte_player[random.randint(0, 7)])
+    time.sleep(2)
     print('Você morreu!')
     exit()
 
@@ -118,10 +122,12 @@ def luta(minion, arma, armadura):
     dano = minion.dano
     monstro_raca = minion.raca
     player_vida = armadura.vida + 5
-    print(f'Seu oponente é um {monstro_raca} que merece morrer!\n'
+    print(f'Seu oponente é um {monstro_raca} Louco pra meter a mão na tua cara!\n'
           f'Ele possui {monstro_vida} de vida e {dano} de ataque!')
+    time.sleep(1.5)
     print(f'Seu equipamento é:\nArma: {arma.nome} com dano de {arma.dano}\n'
           f'Armadura: {armadura.nome} com vida de {armadura.vida}, sua vida total é: {player_vida}')
+    time.sleep(1.5)
     while player_vida > 0 and monstro_vida > 0:
         atk = input("Qual ataque você quer usar?\n"
                     "1 - fraco = 90%\n"
@@ -178,7 +184,10 @@ def luta(minion, arma, armadura):
             print("Vôce se defendeu igual um covarde e fez o inimigo errar!")
         print(f'O {monstro_raca} avança...')
         time.sleep(1.5)
-        if hit_monstro >= 900:
+        if monstro_vida <= 0:
+            print('E tropeça desfalecido...')
+            time.sleep(2)
+        elif hit_monstro >= 900:
             player_vida -= dano * 2
             print(f'Tá maluco!!!! o {monstro_raca} meteu um CRITÃO KKKKKK\n'
                   f'O Inimigo te jantou com {dano * 2} de dano!')
@@ -199,6 +208,125 @@ def luta(minion, arma, armadura):
         return 2
 
 
+def luta_femi(minion, arma, armadura):
+    hit_fraco = [
+        'peteleco',
+        'tapinha',
+        'beijo de esquimó',
+        'aperto de mão',
+        'carrinho sem intenção',
+        'vácuo no wpp'
+    ]
+    hit_medio = [
+        'cheiro no cangote',
+        'murro na boca',
+        'carrinho na maldade',
+        'trava no zap',
+        'chute no ovo esquerdo',
+        'tapa a lá Will Smith'
+    ]
+    hit_forte = [
+        'Uma chave de piroca',
+        'Uma voadora nos peito',
+        'Uma sequencia 1,2, cruzado',
+        'Uma mordida no ovo',
+        'Um murro no cu',
+        'Um beijão de cinema daqueles....'
+
+    ]
+    monstro_vida = minion.vida
+    dano = minion.dano
+    monstro_raca = minion.raca
+    player_vida = armadura.vida + 5
+    print(f'Seu oponente é uma {monstro_raca} louca pra meter a mão na tua cara!\n'
+          f'Ela possui {monstro_vida} de vida e {dano} de ataque!')
+    time.sleep(1.5)
+    print(f'Seu equipamento é:\nArma: {arma.nome} com dano de {arma.dano}\n'
+          f'Armadura: {armadura.nome} com vida de {armadura.vida}, sua vida total é: {player_vida}')
+    time.sleep(1.5)
+    while player_vida > 0 and monstro_vida > 0:
+        atk = input("Qual ataque você quer usar?\n"
+                    "1 - fraco = 90%\n"
+                    "2 - médio = 70%\n"
+                    "3 - forte = 50%\n"
+                    "4 - Defender-se\n")
+        hit_monstro = random.randint(0, 1000)
+        if atk == "1":
+            print(f'Você tentou dar um {hit_fraco[alea5()]}...')
+            time.sleep(1.5)
+            hit = random.randint(0, 1000)
+            if hit >= 900:
+                monstro_vida -= 1 * arma.dano * 2
+                print(f"Foi efetivo pra caralho!! {1 * arma.dano * 2} de dano! Ela não esperava nunca isso")
+                time.sleep(2)
+            elif hit >= 100:
+                monstro_vida -= 1 * arma.dano
+                print(f"Você causou {1 * arma.dano} de dano!!")
+                time.sleep(1)
+            else:
+                print(f'Você errou!!')
+        if atk == "2":
+            print(f'Você tentou dar um {hit_medio[alea5()]}...')
+            time.sleep(1.5)
+            hit = random.randint(0, 1000)
+            if hit >= 900:
+                monstro_vida -= 2 * arma.dano * 2
+                print(f"Acabou o brinquedo pow, da não... deu {2 * arma.dano * 2} de dano nessa vagaba... F")
+                time.sleep(2)
+            elif hit >= 300:
+                monstro_vida -= 2 * arma.dano
+                print(f"Você causou {2 * arma.dano} de dano!!")
+                time.sleep(1)
+            else:
+                print(f'Você errou!!')
+        if atk == "3":
+            print(f'Você tentou dar um {hit_forte[alea5()]}...')
+            time.sleep(1.5)
+            hit = random.randint(0, 1000)
+            if hit >= 900:
+                monstro_vida -= 3 * arma.dano * 2
+                print(f"Eita porra... É valendo fazenda?? \n"
+                      f"Tu só meteu {3 * arma.dano * 2} de dano nessa quenga... precisava disso?")
+                time.sleep(3)
+            elif hit >= 500:
+                monstro_vida -= 3 * arma.dano
+                print(f"Você causou {3 * arma.dano} de dano!!")
+                time.sleep(1)
+            else:
+                print(f'Você errou!!')
+                time.sleep(1)
+        if atk == "4":
+            hit_monstro = 100
+            print(f"Vôce se defendeu igual um covarde e fez a {monstro_raca} errar!")
+        print(f'O {monstro_raca} avança...')
+        time.sleep(1.5)
+        if monstro_vida <= 0:
+            print('E tropeça desfalecida...')
+            time.sleep(2)
+        elif hit_monstro >= 900:
+            player_vida -= dano * 2
+            print(f'Tá maluco!!!! A {monstro_raca} meteu um CRITÃO KKKKKK\n'
+                  f'A {monstro_raca} te jantou com {dano * 2} de dano!')
+            time.sleep(2.5)
+        elif hit_monstro >= 400:
+            player_vida -= dano
+            print(f'A {monstro_raca} te causou {dano} de dano!')
+            time.sleep(1.5)
+        elif hit_monstro < 400:
+            print(f'A {monstro_raca} errou o ataque!')
+            time.sleep(1.5)
+        print(f'--Sua vida restante é: {player_vida}\n--Vida restante da {monstro_raca} é: {monstro_vida}')
+        time.sleep(2)
+    if player_vida > 0:
+        print(f"Você conseguiu!! solou a {monstro_raca}")
+        time.sleep(2)
+        return 1
+    else:
+        print("Você foi solado e o resto é história")
+        time.sleep(2)
+        return 2
+
+
 def minijogo_1():
     n1 = random.randint(0, 9)
     n2 = random.randint(0, 9)
@@ -210,10 +338,10 @@ def minijogo_1():
     while acertou is False:
         c1, c2, c3, c4, c5 = input('5 numeros de 0 a 9 separados por um espaço!\n').split()
         c1, c2, c3, c4, c5 = int(c1), int(c2), int(c3), int(c4), int(c5)
-        chute = [c1, c2, c3, c4, c5]
+        chute_jogo = [c1, c2, c3, c4, c5]
         resposta_final = ''
         a = 0
-        for chutes in chute:
+        for chutes in chute_jogo:
             if chutes == resposta[a]:
                 resposta_final = resposta_final + 'V '
                 a += 1
@@ -221,7 +349,7 @@ def minijogo_1():
                 resposta_final = resposta_final + 'x '
                 a += 1
         print(resposta_final)
-        if chute == resposta:
+        if chute_jogo == resposta:
             print('Parabéns!!')
             acertou = True
 
@@ -230,17 +358,17 @@ def minijogo_2():
     numa = random.randint(1, 10)
     print('Você ta entrando em uma luta!!!'
           '\nVocê tem Três chances de acertar o número de 1 a 10!')
-    acerto = False
+    min2 = False
     chutes = 0
-    while acerto is False and chutes <= 2:
+    while min2 is False and chutes <= 2:
         print('Você tem ' + str(3 - chutes) + ' Chutes')
-        chute = int(input('Fala um número de 1 a 10:\n'))
-        if chute == numa:
-            acerto = True
-        elif chute > numa:
+        chute_jogo2 = int(input('Fala um número de 1 a 10:\n'))
+        if chute_jogo2 == numa:
+            min2 = True
+        elif chute_jogo2 > numa:
             print('Chute muito alto')
             chutes = chutes + 1
-        elif chute < numa:
+        elif chute_jogo2 < numa:
             print('Chute muito baixo')
             chutes = chutes + 1
     if chutes == 3:
@@ -256,11 +384,14 @@ def final_alt():
     new_nome2 = nome[:-3] + 'tori'
     nome_final = 'Prev' + nome[2:-3] + 'tori'
     print('Prevtori está morto...')
+    time.sleep(2)
     print('Agora sem saber pra que direção seguir nem oque fazer você está perdido...')
+    time.sleep(1.5)
     print('Você vaga revira a cabana a procura de alguma pista ou algo útil')
+    time.sleep(1.5)
     andadas = 0
     esquerda = 0
-    while andadas <= 5 and esquerda <= 1:
+    while andadas <= 10 and esquerda <= 3:
         print('***Aonde procurar?\n'
               '1- Esquerda\n'
               '2- Direita')
@@ -275,29 +406,28 @@ def final_alt():
     if esquerda >= 1:
         print('Você encontra um velho caderno com algumas instruções meio apagadas,'
               ' mas é o suficiente pra você continuar a sua jornada!')
-        return
     else:
         print('O tempo passa e tudo oque você encotra é um grande estoque de comida que parece ilimitado\n'
               'Você vê o tempo passar e suas mãos se enrugarem...\n'
-              'a unica coisa que te chama atenção é o barulho do vento nessa ' + local_zero + '...')
+              'a unica coisa que te chama atenção é o barulho do vento nessa cabana...')
         time.sleep(1.5)
         print('parece até um nome.... Prevtori.... e isso lá é um nome? e por falar nisso qual era o meu?')
         time.sleep(1.5)
         print('Você pensa e pensa.... qual era mesmo? ' + new_nome1 + '?.. ou era ' + nome + '?... quem sabe '
               + new_nome2 + '....')
         time.sleep(1.5)
-        print('Quase certeza que era ' + nome_final + '... \n'
-                                                      'Não... na verdade acho que era só Prevtori mesmo...')
+        print('Quase certeza que era ' + nome_final + '... \nNão... na verdade acho que era só Prevtori mesmo...')
         time.sleep(1.5)
         print('Após oque parecem decadas você vê um jovem correndo em sua direção e você berra: \n'
-              '-Você ai!'
-              '\n-Onde você pensa que vai? essa é a minha cabana!')
+              '-Você ai!\n-Onde você pensa que vai? essa é a minha cabana!')
+        exit()
 
-3
-arma_nivel = 1
-armadura_nivel = 2
+
+arma_nivel = 0
+armadura_nivel = 0
 print(f'Seu equipamento inicial são {armaduras[armadura_nivel].nome} e '
-      f'{armas[arma_nivel].nome} que não dão nenhuma vantagem!')
+      f'{armas[arma_nivel].nome} que dão bonus de {armaduras[armadura_nivel].vida} de vida '
+      f'e {armas[arma_nivel].dano} de dano!')
 print('Digite apenas o número desejado pra evitar quebrar o jogo e ter q recomeçar :)')
 time.sleep(2.5)
 
@@ -315,7 +445,7 @@ if dec0 == '2':
     print('-Seu desejo é uma ordem parceiro!\n'
           '***Quando você se dá conta ele ' + mortes_jogador[alea5()])
     morte()
-print('-Tô de boas, mas acho que sei quem pode te ajudar, é um tal de Prevtori... Diz o Homem'
+print('-Tô de boas, mas acho que sei quem pode te ajudar, é um tal de Prevtori... Velho pra caralho... Diz o Homem'
       '\n- A proposíto... qual seu nome?')
 nome = input('Qual seu nome?\n ')
 if nome == 'Prevtori':
@@ -324,6 +454,7 @@ if nome == 'Prevtori':
 else:
     print('-Aaah... que nome estranho... ' + nome + '...nunca ouvi falar')
 print('-Então ' + nome + ' siga pela direita eu acho... ou era esquerda?... não! era a direita mesmo!')
+time.sleep(2)
 print('-Agora vaza!')
 print('***Qual direção seguir?*** \n1- Esquerda\n2- Direita\n ')
 dec1 = input('Digite 1 ou 2:\n ')
@@ -334,13 +465,16 @@ if dec1 == '1':
     if confronto1 == 1:
         print(f'***Voce matou o {creep1.raca}'
               f', mas encontrou um caminho sem saída... '
-              f'Pelo menos você conseguiu pegar o jeans do {creep1.raca}!'
-              f'Você tem que voltar e continuar por outro caminho')
+              f'Pelo menos você conseguiu pegar o jeans do {creep1.raca}!')
+        time.sleep(1.5)
+        print(f'***Você tem que voltar e continuar por outro caminho')
         armadura_nivel += 1
     elif confronto1 == 2:
         print(f'Infelizmente o {creep1.raca} tinha mais oque fazer e decidiu não te matar '
-              f'por que você tá no tutorial ainda!\n'
-              f'Você se levanta e tem que voltar pois não ha saidas além de outra surra...')
+              f'por que você tá no tutorial ainda!\n')
+        time.sleep(1.5)
+        print(f'Você se levanta e tem que voltar pois não ha saidas além de outra surra...')
+time.sleep(1)
 print('***Você segue por um longo corredor iluminado por velhas lâmpadas, algumas queimadas...')
 time.sleep(1.5)
 print('***Você se depara com uma porta e precisa decidir....')
@@ -348,7 +482,7 @@ print('1- Seguir pra fora do prédio\n2- Voltar')
 dec2 = input('Digite 1 ou 2:\n ')
 if dec2 == '1':
     print('***Você segue pra fora e vê que está escurecendo\n'
-          '***Você segue o unico caminho de pedrinhas até avistar uma velha cabana...')
+          '***Você segue o único caminho de pedrinhas até avistar uma velha cabana...')
     time.sleep(1.5)
 if dec2 == '2':
     matador1 = monstros_hard[alea5()]
@@ -369,11 +503,17 @@ if dec2 == '2':
             print('Eu te avisei... vai tomar um reset de trouxa tbm')
             morte()
     else:
-        print('***Você da uma de Jõao sem braço e segue seu caminho')
-print('***Você entra na cabana e encontra quem aquele cara tinha falado '
+        print('***Você da uma de Jõao sem braço e atravessa a porta')
+        time.sleep(1.5)
+        print('***Você segue pra fora e vê que está escurecendo\n'
+              '***Você segue o único caminho de pedrinhas até avistar uma velha cabana...')
+        time.sleep(1.5)
+print('***Você entra na cabana e encontra um velho aquele cara tinha falado '
       'e se da conta de q não perguntou o nome dele.')
+time.sleep(1.5)
 print('***Você decide dar um nome a ele, qual vai ser?')
 chefe = input('Nome do doido lá:\n ')
+time.sleep(1.5)
 
 # Segunda parte --------------------------------------------------------------------------------------------------------
 
@@ -381,6 +521,7 @@ print('-----SEGUNDA PARTE------')
 time.sleep(1.5)
 print('-Você ai! - Berra um velho acabado igual maracuja de gaveta\n'
       '-Onde você pensa que vai? essa é a minha cabana!')
+time.sleep(1.5)
 print('***Você encara a múmia velha e decide se parte pra cima dele ou se conversa...')
 dec3 = input('1- Partir pra cima e arrebentar esse velho broxa\n'
              '2- tentar acalmar o corno manso\n')
@@ -413,15 +554,18 @@ while velho_vivo is True:
             print(morte_especial())
     print('O velho te encara por um tempo e te pergunta:\n'
           '-E quem porra é ' + chefe + '? e que nome de bicho é esse? ' + nome + '.... nunca ouvi falar')
+    time.sleep(1.5)
     print('-O meu Nome é Prevtori, mas pode me chamar de Prevtori')
+    time.sleep(1.5)
     esp = input('Tá me entendendo?\n'
                 'qual é o meu nome?\n ')
     tentativas = 0
     while esp != 'Prevtori':
         esp = input('Escreve direito Viado!!:\n')
+        time.sleep(1)
         tentativas += 1
         if tentativas == 3:
-            print('Não tenho tempo pra isso não... Tá fudido na minha mão parceiro!')
+            print('- Não tenho tempo pra isso não... Tá fudido na minha mão parceiro!')
             luta_prev = luta(Prevtori, armas[arma_nivel], armaduras[armadura_nivel])
             if luta_prev == 1:
                 print('***Voce matou um dos contrutores da Arca de Noé...')
@@ -430,17 +574,21 @@ while velho_vivo is True:
                 break
             elif luta_prev == 2:
                 print(morte_especial())
-    print('-Hmmmm... Pelo menos não é surdo... Mas como você '
-          'invadiu minha ' + local_zero + ' ou você me faz um favor ou você vai tomar um reset')
-    print('***Eai meu parceiro? vai deixar esse porra de Prevtori falar assim contigo???\n'
-          '1- Tá maluco? esse velho tem cara de doido, melhor fazer oque ele quer...\n'
-          '2- Eu não nasci um Corno pra levar desaforo pra casa, vou partir esse velho baitola no meio\n')
+    print('- Hmmmm... Pelo menos não é surdo... Mas como você '
+          'invadiu minha cabana ou você me faz um favor ou você vai tomar um reset')
+    time.sleep(1.5)
+    print('***Eai meu parceiro? vai deixar esse porra de Prevtori falar assim contigo???')
+    time.sleep(1.5)
+    print('1 - Tá maluco? esse velho tem cara de doido, melhor fazer oque ele quer...\n'
+          '2 - Eu não nasci um Corno pra levar desaforo pra casa, vou partir esse velho baitola no meio\n')
     dec4 = input('Digite 1 ou 2:\n ')
     if dec4 == '1':
         print('***Você fala calmamente: \n'
-              '-Éoque doido do caralho, para com essa porra ai, oque que tu quer que eu faça?')
+              '- Éoque doido do caralho, para com essa porra ai, oque que tu quer que eu faça?')
+        time.sleep(1.5)
     elif dec4 == '2':
         print('Bora vê então aki seu velho goiaba do caralho!!')
+        time.sleep(1.5)
         luta_prev = luta(Prevtori, armas[arma_nivel], armaduras[armadura_nivel])
         if luta_prev == 1:
             print('***Voce matou um dos contrutores da Arca de Noé...')
@@ -449,18 +597,21 @@ while velho_vivo is True:
             break
         elif luta_prev == 2:
             print(morte_especial())
+    print('***Prevtor te diz que você precisa produrar seu diário em uns prédios abandonados ali perto\n'
+          'e aconteça oque acontecer não olhe dentro dele!')
 
-
-        # Terceira parte -------------------------------------------------------------------------------------------------------
-
-        # Rua Deserta
+# Terceira parte -------------------------------------------------------------------------------------------------------
+    time.sleep(1)
+    print('-----TERCEIRA PARTE------')
+    time.sleep(2)
+# Rua Deserta
     completo = False
     repetir_predio1 = False
     repetir_predio2 = False
     repetir_predio3 = False
-    print('***Você recebe a missão de Prevtori que te pede para procurar nos predios ao redor o seu velho diario...')
+    print('***Você segue andando pelo caminho indicado e encontra a rua que o Velhiado te indicou...')
     time.sleep(1.5)
-    print('***Você entra na Rua Deserta')
+    print('***Você entra numa Rua Deserta')
     print('***Você vê 3 prédios que batem com a descrição do Velho goiaba, um na esquerda e dois na direita.')
     time.sleep(1.5)
     print('Qual deles você quer entrar primeiro?')
@@ -480,7 +631,8 @@ while velho_vivo is True:
                   'você entra em uma sala e vê um vulto num canto.')
             time.sleep(1.5)
             print('Você quer se aproximar?\n1- Sim, qualquer coisa eu mato ele na porrada oush\n'
-                  '2- Não, tá maluco,doido, biluteteia??? imagina chegar até aki e morrer de bobeira pra um Flamenguista??')
+                  '2- Não, tá maluco,doido, biluteteia??? imagina chegar até '
+                  'aki e morrer de bobeira pra um Flamenguista??')
             predio_1 = input('Digite 1 ou 2:\n ')
             if predio_1 == '1':
                 creep2 = monstros_easy[alea5()]
@@ -534,7 +686,7 @@ while velho_vivo is True:
                       f'\n por trás e está te atacando!')
                 time.sleep(1.5)
                 confronto3 = (creep3, armas[arma_nivel], armaduras[armadura_nivel])
-                if confronto3 == 1 :
+                if confronto3 == 1:
                     print(f'Você consegue se livrar do {creep3.raca} e pode voltar a procurar em paz....')
                     time.sleep(1.5)
                     print('Mas por quanto tempo?')
@@ -599,6 +751,35 @@ while velho_vivo is True:
             print('Você decide ser uma boa moça e seguir com a missão à risca! (com crase ein)')
             time.sleep(2)
             print('Você chega ao Prevtori e lhe entrega o diário!')
+            time.sleep(1)
+            print('O Velho fresco vê o seu valor e decide frescar com você!\n'
+                  'Ele diz que vai te contar aonde é a saída, mas você vai ter que fazer um favor pra ele...')
+            time.sleep(1.5)
+            print('-Você parece ser tão... Forte...- diz o Velho não tão broxa ao se aproximar...\n'
+                  '-Eu só quero ver o quão forte você realmente é... e eu te conto tudo! <3')
+            time.sleep(2)
+            print('Que porra é essa??\n'
+                  '1 - Esse velho viado tá ficando demente... melhor tirar ele dessa miséria slk\n'
+                  '2 - Caralho... mas tudo bem, oque é o pior que pode acontecer? ele não encostando tá safe!')
+            prev_final = input('Digite 1 ou 2\n')
+            if prev_final == '2':
+                print('Você começa se despir e o velho começa a falar de uma ponte\n')
+                time.sleep(1.5)
+                print('Quando você termina de tirar a roupa o velho avança pega a sua roupa e desaparece!\n'
+                      'Você consegiu descobrir o próximo passo, mas agora está sem armadura :(\n'
+                      'VELHO FILHA DA PUTA!')
+                time.sleep(2)
+                print('Você segue o caminho que aquele corno do caralho falou e encontra uma ponte.')
+                armadura_nivel = 0
+            if prev_final == '1':
+                luta_prev = luta(Prevtori, armas[arma_nivel], armaduras[armadura_nivel])
+                if luta_prev == 1:
+                    print('***Voce matou um dos contrutores da Arca de Noé...')
+                    velho_vivo = False
+                    final_alt()
+                    break
+                elif luta_prev == 2:
+                    print(morte_especial())
         elif diario == 2:
             print('-Aquele Velho baitola não manda nem na biscate da mulher dele vai mandar em mim?')
             time.sleep(2)
@@ -619,182 +800,268 @@ while velho_vivo is True:
             elif luta_prev == 2:
                 print(morte_especial())
 if velho_vivo is False:
-    print('merda! talvez já pule a proxima parte? ou pule as proximas duas e continue igual')
+    print('Você consegue ler algumas coisas no caderno que falam sobre uma ponte que leva até uma caverna...')
+    time.sleep(1.5)
+    arma_nivel += 1
+    armadura_nivel += 1
+    print(f'***E você encontrou {armas[arma_nivel].nome} e {armaduras[armadura_nivel].nome}!\n'
+          f'Valeu a pena passar o Velho! ')
+    time.sleep(1.5)
+    print('Bom, hora de ir! É melhor do que ficar aqui parado e virar um velho louco!\n'
+          ' Você segue as intruções no caderno e encontra um atalho para a ponte')
+    time.sleep(1.5)
+    
+# Quarta parte ---------------------------------------------------------------------------------------------------------
 
+print('-----QUARTA PARTE------')
+time.sleep(2)
+# Ponte
+print('Você entra na Ponte')
+time.sleep(1.5)
+print('Você começa a caminhar entre os carros que parecem abandonados a décadas.'
+      'Alguns deles te chamam a atenção.. Qual deles você quer olhar primeiro?')
+time.sleep(2)
+carro1 = False
+carro2 = False
+carro3 = False
+carro4 = False
+carro5 = False
+completo1 = False
+while completo1 is False:
+    car = input('1- Marea preto\n'
+                '2- Pegeout prata\n'
+                '3- Fusca Azul\n'
+                '4- Camaro Vermelha\n'
+                '5- Brasília Amarela\n  ')
+    if car == '4' and carro4 is True:
+        print('Você decide dar mais uma olhada no camaro e nota uma multidão se aproximando!')
+        time.sleep(1.5)
+        print('Você se desespera e procura uma saída urgentemente!')
+        time.sleep(2)
+        print('alguma coisa perto do volante lhe chama atenção! é a chave ma maquina!')
+        time.sleep(1.5)
+        print('Nao há tempo para decisões! voc~e só acelera e deixa aquele bando pra trás...')
+        time.sleep(3)
+        print('Mas qm era eles?')
+        completo1 = True
+        break
+    elif car == '1' and carro1 is True:
+        print('Não tem mais o que ver ali além de um marea sendo um marea.')
+        time.sleep(1.5)
+    elif car == '2' and carro2 is True:
+        print('Não tem mais o que ver ali, vai que você realmente adquire um pegeout?')
+        time.sleep(1.5)
+    elif car == '3' and carro3 is True:
+        print('Não tem mais o que ver ali, o Fusca Azul gera agressão involuntaria')
+        time.sleep(1.5)
+    elif car == '5' and carro5 is True:
+        print('Não tem mais o que ver ali.')
+        time.sleep(1.5)
+    if car == '1' and carro1 is False:
+        print('Você se aproxima do Marea com cuidado, ele parece estranho e o risco '
+              'de combustão espontanêa é real!')
+        time.sleep(1.5)
+        print('Você quer correr o risco?\n1 - Sim, eu tô maluco biluteteia biruta da cabeça\n'
+              '2 - não comi merda não meu parceiro, perto de um Marea eu só chego depois de morto!')
+        car1 = input('Digite 1 ou 2\n')
+        if car1 == '1':
+            print('Parece que você comeu merda meu amigo, vc se aproxima e escuta um barulho alto vindo '
+                  'dele antes de vê a bola de fogo!')
+            time.sleep(1.5)
+            print('Você deu sorte, mais um passo pra frente e você tinha perdido mais do que só as sombrancelhas!')
+            carro1 = True
+            time.sleep(1.5)
+        if car1 == '2':
+            print('Você decide seguir a razão e recua, após o segundo passo você vê a bola de fogo!')
+            time.sleep(1.5)
+            print('o Marea explodiu como de costume e você agradece por esta a uma distancia segura!')
+            carro1 = True
+            time.sleep(1.5)
+    if car == '2' and carro2 is False:
+        print('Você se aproxima do Pegeout e começa a sentir o perigo de adquirir um deles\n'
+              'Você agradece por não ter a sua carteira com você pra nem correr o risco de comprar.')
+        time.sleep(1.5)
+        print('Dentro dele você vê o que uma alma penada, talvez condenada a ficar aqui até vender o carro!')
+        time.sleep(1.5)
+        print('Você quer tentar ajudar a alma artomentada?\n1- Sim, ninguém merece um carro assim, '
+              'vamos tentar da a segunda alegria do dono de pegeout\n'
+              '2- Melhor não, se ele me empurra esse monstro eu vou ficar preso aqui também....\n ')
+        ajud = input('Digite 1 ou 2\n')
+        if ajud == '1':
+            print('Você se aproxima e o Fantasma ja lhe pergunta se '
+                  'você tem interesse no Pegeout 206 prata, 2 portas,\n'
+                  'tudo funcionando, só o ar q tá meio fraco, mas nada que uma janela aberta não resolva!')
+            time.sleep(3)
+            print('Você diz que quer dar uma olhada e ele te olha com os olhos marejados.\n- Obrigado... '
+                  'Você é um Héroi! - ele diz e desaparece!\n')
+            time.sleep(3)
+            print('Ele só precisava que alguem com noção demonstrasse interesse no carro...\n'
+                  'Essa foi fácil, apesar de arriscadíssimo!')
+            time.sleep(2)
+            arma_nivel += 1
+            print(f'***Você encontrou uma {armas[arma_nivel].nome} em baixo de um dos Pneus, que Sorte')
+            carro2 = True
+            time.sleep(1.5)
+        if ajud == '2':
+            print('Você é um homem sensato e não deixou que um fantasma que caiu na arapuca te puxasse junto!\n'
+                  'Você vai conseguir dormir em paz sabendo que não tem um pegeout na garagem.')
+            time.sleep(1.5)
+    if car == '3' and carro3 is False:
+        creep4 = monstros_easy[alea5()]
+        print('Você se aproxima do fusca azul e um ' + creep4.raca +
+              ' Aparece do nada e vem te agredir gritando "Fusca Azul!", '
+              'você não tem alternativa além de se defender!')
+        time.sleep(2)
+        car3 = luta(creep4, armas[arma_nivel], armaduras[armadura_nivel])
+        carro3 = True
+        if car3 == 1:
+            print('Você acabou com a raça daquele corno infantil!, mas não encontra \n'
+                  'nada além de um belo fusca azul!')
+            time.sleep(1.5)
+            carro3 = True
+        if car3 == 2:
+            print('Ele acerta o seu braço com uma força jamais vista...')
+            morte()
+    if car == '4' and carro4 is False:
+        print('Você se aproxima do Camaro e pensa quem era o Playboy q dirigia ese Bumblebee vermelho...')
+        time.sleep(1.5)
+        print('ao olhar no banco de trás você encontra uma caixa, mas a porta está trancada!\n'
+              'Você precisa de alguma coisa para quebrar o vidro! ')
+        time.sleep(1.5)
+        if arma_nivel >= 1:
+            print(f'***Você usa sua {armas[arma_nivel].nome} para arrebentar o vidro sem enrolação e recupera...')
+            time.sleep(1.5)
+            print('Um amuleto? oque será que ele faz?')
+            time.sleep(2)
+            print('<> Para prosseguir vá novamente ao camaro! <>')
+            
+            carro4 = True
+        else:
+            print('***Você tem que procurar em outros lugares!***')
+            time.sleep(1.5)
+    if car == '5' and carro5 is False:
+        print('Você se aproxima da Brasília amarela e observa que suas portas estão abertas!\n')
+        time.sleep(1.5)
+        guerreiro2 = monstros_medium[alea5()]
+        print('1 - Entrar nela?\n'
+              '2 - Não entendi, flws bença')
+        dec6 = input('Digite 1 ou 2\n')
+        if dec6 == '1':
+            print(f'Apesar de querer os mamonas a única coisa que você encontra é um {guerreiro2.raca}!')
+            time.sleep(1.5)
+            confronto_med2 = (guerreiro2, arma_nivel, armadura_nivel)
+            if confronto_med2 == 2:
+                morte()
+            else:
+                print(f'Você acabou com o {guerreiro2.raca} e encontrou uma armadura!!')
+                armadura_nivel += 1
+                print(f'Sua armadura agora é uma {armaduras[armadura_nivel].nome}!')
+                time.sleep(1.5)
+                carro5 = True
+        if dec6 == '2':
+            print(f'Quando você se vira você nota o {guerreiro2.raca} dentro da van...')
+            time.sleep(1)
+print("Você acelera pela ponte desviando dos carros abandonados e nem percebe que ela acabou em um buraco!")
+time.sleep(3)
 
+# Quinta parte ---------------------------------------------------------------------------------------------------------
 
+print('-----QUINTA PARTE------')
+
+# Caverna
+print('Você acorda em uma Caverna e não sabe nem pra que lado tá o teto...')
+time.sleep(1.5)
+print('Você se rasteja para fora do carro e não tem ideia de onder ir')
+time.sleep(1.5)
+print('Suas opções são limitadas! o máximo que você pode fazer é sair tateando!\n'
+      'para que lado você quer tatear?\n'
+      '1- Esquerda\n2- Direita\n3- Frente')
+
+input('Digite 1, 2 ou 3:\n ')
+print('Zoas fiquei cansado e agora é tudo sorte! XD\nAdivinhe um número de 1 a 15!')
+saida = random.randint(1, 15)
+acerto = False
+desculpa = False
+caverna = False
+tempo = 0
+while caverna is False:
+    while desculpa is False:
+        chute = int(input('Qual seu chute de 1  a 15?\n  '))
+        if chute == saida:
+            desculpa = True
+        elif chute < 7:
+            print('Não consigo ver nada, mas parece ser um beco sem saída.')
+            time.sleep(1)
+            tempo += 1
+        elif chute >= 7:
+            print('Droga... não pode ser por aqui... apenas pedras.')
+            time.sleep(1)
+            tempo += 1
+        if tempo == 3:
+            print('Droga... eu não sei se escutei alguma coisa ou se foi algo da minha cabeça...')
+            time.sleep(1)
+        if tempo == 5:
+            print('Eu tenho certeza que ouvi alguma coisa!! que merda é essa?')
+            time.sleep(1)
+        if tempo == 7:
+            print('PORRRA! esse bicho tá do meu lado... eu posso sentir o seu cheiro Podre!')
+            time.sleep(1)
+        if tempo == 8:
+            print('Uma criatura te ataca e te derruba no chão, apesar do breu você precisa se defender!')
+            time.sleep(1)
+            resu = luta_femi(CavernaMan, armas[arma_nivel], armaduras[armadura_nivel])
+            if resu == 1:
+                print('Você consegue se desvencilhar e correr!\n'
+                      'Ainda está perdido, pelo menos consegue um pouco mais de tempo!')
+                tempo -= 5
+            elif resu == 2:
+                print('A Criatura finca seus dentes na sua garganta...')
+                print(morte())
+    print('***Você consegue ver uma luz!!!\n')
+    time.sleep(2)
+    print('A saída está próxima, mas a Criatura se aproxima\n'
+          '1- Derrotar a Criatura e sair sem pressa\n'
+          '2- Fugir e tentar a sorte na corrida!')
+    time.sleep(1)
+    lut = int(input('Digite 1 ou 2:\n '))
+    if lut == 1:
+        luta = luta_femi(CavernaMan_Puto, armas[arma_nivel], armaduras[armadura_nivel])
+        if luta == 1:
+            print('Você consegue vencer a criatura que agora você examina e...')
+            time.sleep(2)
+            print('E vê que é uma capivara enorme... bem, antes ela do que eu!')
+            time.sleep(2)
+            print(f'Você que ela é estilosa e decide surrupiar a {armaduras[armadura_nivel].nome} '
+                  f'que ela está vestindo!')
+            armadura_nivel += 1
+            time.sleep(2)
+            print('Você vaga pela caverna sem pressa até encontrar a luz que vem de sua entrada.')
+            acerto = True
+        if luta == 2:
+            print('A Criatura é mais forte do que você imaginava... Você é obrigado a fugir!')
+            lut = 2
+    if lut == 2:
+        print('Você está correndo no escuro... 50% de chance de dar merda.')
+        bola = random.randint(1, 2)
+        chut = int(input('Chute 1 ou 2:\n '))
+        if chut == bola:
+            print('Parabéns! você corre no breu aos tropeços até que comeca a ver a luz da entrada da caverna!')
+            time.sleep(2)
+            print('Ainda bem que está de dia!! apesar de você não saber se ainda é do mesmo dia...')
+            caverna = True
+        else:
+            print('Você corre para uma beco sem saída... pelo menos você não '
+                  'consegue ver oque vai acontecer com você...'
+                  '\nA ultima coisa que você sente é o Bafo da criatura na sua nuca')
+            print(morte())
+
+print('***Você está fora da caverna!')
+print('To be continue')
 
 
 def missao(local_zero):
     drop = 0
-    completo = False
 
-    if local_zero == caminhos[1]:
-        # Ponte
-        print('Você recebe a missão de Prevtori que te pede para procurar nos Carros o seu velho diario...')
-        print('Você entra na ' + local_zero)
-        print('Você começa a caminhar entre os carros que parecem abandonados a décadas.'
-              'Alguns deles te chamam a atenção! Qual deles você quer olhar primeiro?')
-        carro1 = False
-        carro2 = False
-        carro3 = False
-        carro4 = False
-        carro5 = False
-        while completo is False:
-            car = input('1- Marea preto\n'
-                        '2- Pegeout prata\n'
-                        '3- Fusca Azul\n'
-                        '4- Camaro Vermelha\n'
-                        '5- Brasília Amarela\n:  ')
-            if car == '4' and carro4 is True:
-                completo = True
-                break
-            elif car == '1' and carro1 is True:
-                print('Não tem mais o que ver ali além de um marea sendo um marea.')
-            elif car == '2' and carro2 is True:
-                print('Não tem mais o que ver ali, vai que você realmente adquire um pegeout?')
-            elif car == '3' and carro3 is True:
-                print('Não tem mais o que ver ali, o Fusca Azul gera agressão involuntaria')
-            elif car == '5' and carro5 is True:
-                print('Não tem mais o que ver ali.')
-            if car == '1' and carro1 is False:
-                print('Você se aproxima do Marea com cuidado, ele parece estranho e o risco '
-                      'de combustão espontanêa é real!')
-                car1 = input('Você quer correr o risco?\n1- Sim, eu tô maluco biluteteia biruta da cabeça\n'
-                             '2- não comi merda não meu parceiro, perto de um Marea eu só chego depois de morto!\n ')
-                if car1 == '1':
-                    print('Parece que você comeu merda meu amigo, vc se aproxima e escuta um barulho alto vindo '
-                          'dele antes de vê a bola de fogo!\nVocê deu sorte, mais um passo '
-                          'pra frente e você tinha perdido mais do que só as sombrancelhas!')
-                    carro1 = True
-                if car1 == '2':
-                    print('Você decide seguir a razão e recua, após o segundo passo você vê a bola de fogo!\n'
-                          'o Marea explodiu como de costume e você agradece por esta a uma distancia segura!')
-                    carro1 = True
-            if car == '2' and carro2 is False:
-                print('Você se aproxima do Pegeout e começa a sentir o perigo de adquirir um deles\n'
-                      'Você agradece por não ter a sua carteira com você pra nem correr o risco de comprar.')
-                print('Dentro dele você vê o que uma alma penada, talvez condenada a ficar aqui até vender o carro!')
-                ajud = input('Você quer tentar ajudar a alma artomentada?\n1- Sim, ninguém merece um carro assim, '
-                             'vamos tentar da a segunda alegria do dono de pegeout\n'
-                             '2- Melhor não, se ele me empurra esse monstro eu vou ficar preso aqui também....\n ')
-                if ajud == '1':
-                    print('Você se aproxima e o Fantasma ja lhe pergunta se '
-                          'você tem interesse no Pegeout 206 prata, 2 portas,\n'
-                          'tudo funcionando, só o ar q tá meio fraco, mas nada que uma janela aberta não resolva!\n'
-                          'Você diz que quer dar uma olhada e ele te olha com os olhos marejados.\n- Obrigado... '
-                          'Você é um Héroi! - ele diz e desaparece!\n'
-                          'Ele só precisava que alguem com noção demonstrasse interesse no carro...\n'
-                          'Essa foi fácil, apesar de arriscadíssimo!')
-                    print('***Você encontrou um ' + armas[1].nome + ' em baixo de um dos Pneus***')
-                    drop += 1
-                    carro2 = True
-                if ajud == '2':
-                    print('Você é um homem sensato e não deixou que um fantasma que caiu na arapuca te puxasse junto!\n'
-                          'Você vai conseguir dormir em paz sabendo que não tem um pegeout na garagem.')
-            if car == '3' and carro3 is False:
-                print('Você se aproxima do fusca azul e um ' + monstros[alea5()].raca +
-                      ' Aparece do nada e vem te agredir gritando "Fusca Azul!", '
-                      'você não tem alternativa além de se defender!')
-                car3 = luta_facil(drop)
-                carro3 = True
-                if car3 == 1:
-                    print('Você acabou com a raça daquele corno infantil!, mas não encontra \n'
-                          'nada além de um belo fusca azul!')
-                    carro3 = True
-                if car3 == 2:
-                    print('Ele acerta o seu braço com uma força jamais vista...')
-                    morte()
-            if car == '4' and carro4 is False:
-                print('Você se aproxima do Camaro e pensa quem era o Playboy q dirigia ese Bumblebee vermelho...\n'
-                      'ao olhar no banco de trás você encontra um livro, mas a porta está trancada!\n'
-                      'Você precisa de alguma coisa para quebrar o vidro! ')
-                if drop >= 1:
-                    print('***Você usa o tijolo para Arrebentar o vidro do '
-                          'Camaro e consegue o Diário do velho broxa!***\n'
-                          'Vir novamente ao Camaro completará a missão!')
-                    carro4 = True
-                else:
-                    print('***Você tem que procurar em outros lugares!***')
-            if car == '5' and carro5 is False:
-                print('Você se aproxima da Brasília amarela e observa que suas portas estão abertas!\n'
-                      'Apesar dessa cena lhe parecer familiar você não encontra nada de útil nela...')
-                carro5 = True
-    if local_zero == caminhos[2]:
-        # Caverna
-        print('Você recebe a missão de Prevtori que te pede para procurar ao redor o seu velho diario...')
-        print('Você entra na ' + local_zero)
-        print('Você está num breu que não consegue nem ver oque está a sua frente!\n'
-              'Suas opções são limitadas! o máximo que você pode fazer é sair tateando!\n'
-              'para que lado você quer tatear?\n'
-              '1- Esquerda\n2- Direita\n3- Frente')
-        while completo is False:
-            input('Digite 1, 2 ou 3:\n ')
-            print('Você adentra na escuridão e no segundo passo sem vê a entrada da caverna você se perde...')
-            print('Você não sabe nem pra que lado fica o teto... agora é tudo sorte!\nAdivinhe um número de 1 a 15!')
-            saida = random.randint(0, 15)
-            acerto = False
-            desculpa = False
-            tempo = 0
-            while acerto is False:
-                while desculpa is False:
-                    chute = int(input('Qual seu chute de 1  a 15?\n  '))
-                    if chute == saida:
-                        desculpa = True
-                    elif chute < 7:
-                        print('Não consigo ver nada, mas parece ser um beco sem saída.')
-                        tempo += 1
-                    elif chute >= 7:
-                        print('Droga... não pode ser por aqui... apenas pedras.')
-                        tempo += 1
-                    if tempo == 3:
-                        print('Droga... eu não sei se escutei alguma coisa ou se foi algo da minha cabeça...')
-                    if tempo == 5:
-                        print('Eu tenho certeza que ouvi alguma coisa!! que merda é essa?')
-                    if tempo == 7:
-                        print('PORRRA! esse bicho tá do meu lado... eu posso sentir o seu cheiro Podre!')
-                    if tempo == 8:
-                        print('Uma criatura te ataca e te derruba no chão, apesar do breu você precisa se defender!')
-                        resu = luta_facil(drop)
-                        if resu == 1:
-                            print('Você consegue se desvencilhar e correr!\n'
-                                  'Ainda está perdido, pelo menos consegue um pouco mais de tempo!')
-                            tempo -= 5
-                        elif resu == 2:
-                            print('A Criatura finca seus dentes na sua garganta...')
-                            print(morte())
-                print('***Você encontrou o Diario do Velho viado Prevtori!!!\n'
-                      '*** Você encontra um... ' + armas[1].nome + '!!!, sua nova arma!!\n'
-                      'Mas agora você precisa achar a saída!! e a Criatura se aproxima\n'
-                      '1- Derrotar a Criatura e sair sem pressa\n'
-                      '2- Fugir e tentar a sorte encontrando a sáida')
-                drop += 1
-                lut = int(input('Digite 1 ou 2:\n '))
-                if lut == 1:
-                    luta = luta_facil(drop)
-                    if luta == 1:
-                        print('Você consegue vencer a criatura que agora você examina e descobre que era\n'
-                              'apenas uma capivara enorme... bem, antes ela do que eu!\n'
-                              'Você vaga pela caverna sem pressa até encontrar a luz que vem de sua entrada.')
-                        acerto = True
-                        completo = True
-                    if luta == 2:
-                        print('A Criatura é mais forte do que você imaginava... Você é obrigado a fugir!')
-                        lut = 2
-                if lut == 2:
-                    print('Você está correndo no escuro... 50% de chance de dar merda...')
-                    bola = random.randint(1, 2)
-                    chut = int(input('Digite 1 ou 2:\n '))
-                    if chut == bola:
-                        print('Você corre no breu aos tropeços até que comeca a ver a luz da entrada da caverna!\n'
-                              'Ainda bem que está de dia!! apesar de você não saber se ainda é do mesmo dia...')
-                        acerto = True
-                        completo = True
-                    else:
-                        print('Você corre para uma beco sem saída... pelo menos você não '
-                              'consegue ver oque vai acontecer com você...'
-                              '\nA ultima coisa que você sente é o Bafo da criatura na sua nuca')
-                        print(morte())
     if local_zero == caminhos[3]:
         # Viela Escura
         drop = 0
@@ -837,34 +1104,6 @@ def missao(local_zero):
 
 
 # Próxima parte do jogo
-
-
-
-'''
-local_zero = caminhos[alea5()]
-creep1 = monstros[alea5()].raca
-creep2 = monstros[alea5()].raca
-nome = tutorial()
-chefe = transicao1()
-prevtori = segunda_parte()
-if prevtori == False:
-    final_alt()
-elif prevtori == True:
-   print('Prevtori te da uma missão...')
-r_missao = missao(local_zero)
-if r_missao == 1:
-    print('Você chega ao Prevtori e lhe entrega o diário!')
-if r_missao == 2:
-    print('Pelo seu olhar o Velho viado já sabe oque você fez\n'
-          'Apesar dele parecer uma múmia ele não nasceu ontem!!'
-          '\nQuando você abre a boca pra falar o Prevtori avança em sua direção!!')
-    resul = luta_dificil(drop)
-    if resul == 1:
-        print('***Voce matou um dos contrutores da Arca de Noé...')
-    elif resul == 2:
-        print(morte_especial())
-'''
-# Coisas que faltam fazer...
 # Caminhos 4 e 5
 # Final alternativo voltar para o final verdadeiro
 # Final verdadeiro
