@@ -57,6 +57,10 @@ def luta(minion, arma, armadura):
         'Um beijão de cinema daqueles....'
 
     ]
+    azul = '\033[34m'
+    vermelho = '\033[31m'
+    miss = '\033[37m'
+    fim = '\033[m'
     monstro_vida = minion.vida
     dano = minion.dano
     monstro_raca = minion.raca
@@ -64,8 +68,8 @@ def luta(minion, arma, armadura):
     print(f'Seu oponente é um {monstro_raca} Louco pra meter a mão na tua cara!\n'
           f'Ele possui {monstro_vida} de vida e {dano} de ataque!')
     time.sleep(1.5)
-    print(f'Seu equipamento é:\nArma: {arma.nome} com dano de {arma.dano}\n'
-          f'Armadura: {armadura.nome} com vida de {armadura.vida}, sua vida total é: {player_vida}')
+    print(f'Seu equipamento é:\nArma: \033[30;43m{arma.nome}\033[m com dano de {arma.dano}\n'
+          f'Armadura: \033[30;43m{armadura.nome}\033[m com vida de {armadura.vida}, sua vida total é: {player_vida}')
     time.sleep(1.5)
     while player_vida > 0 and monstro_vida > 0:
         atk = input("Qual ataque você quer usar?\n"
@@ -80,43 +84,45 @@ def luta(minion, arma, armadura):
             hit = random.randint(0, 1000)
             if hit >= 900:
                 monstro_vida -= 1 * arma.dano * 2
-                print(f"Foi efetivo pra caralho!! {1 * arma.dano * 2} de dano! Ele não esperava nunca isso")
+                print(f"\033[100;91mFoi efetivo pra caralho!!\033[m {1 * arma.dano * 2} de dano! "
+                      f"Ele não esperava nunca isso")
                 time.sleep(2)
             elif hit >= 100:
                 monstro_vida -= 1 * arma.dano
-                print(f"Você causou {1 * arma.dano} de dano!!")
+                print(f"{azul}Você causou {1 * arma.dano} de dano!!{fim}")
                 time.sleep(1)
             else:
-                print(f'Você errou!!')
+                print(f'{miss}Você errou!!{fim}')
         if atk == "2":
             print(f'Você tentou dar um {hit_medio[alea5()]}...')
             time.sleep(1.5)
             hit = random.randint(0, 1000)
             if hit >= 900:
                 monstro_vida -= 2 * arma.dano * 2
-                print(f"Acabou o brinquedo pow, da não... deu {2 * arma.dano * 2} de dano nesse viado... F")
+                print(f"\033[100;91mAcabou o brinquedo pow\033[m da não... deu {2 * arma.dano * 2} de dano "
+                      f"nesse viado... F")
                 time.sleep(2)
             elif hit >= 300:
                 monstro_vida -= 2 * arma.dano
-                print(f"Você causou {2 * arma.dano} de dano!!")
+                print(f"{azul}Você causou {2 * arma.dano} de dano!!{fim}")
                 time.sleep(1)
             else:
-                print(f'Você errou!!')
+                print(f'{miss}Você errou!!{fim}')
         if atk == "3":
             print(f'Você tentou dar um {hit_forte[alea5()]}...')
             time.sleep(1.5)
             hit = random.randint(0, 1000)
             if hit >= 900:
                 monstro_vida -= 3 * arma.dano * 2
-                print(f"Eita porra... É valendo fazenda?? \n"
+                print(f"\033[40;31mEita porra... É valendo fazenda??\033[m \n"
                       f"Tu só meteu {3 * arma.dano * 2} de dano na bunda desse viado... precisava disso?")
                 time.sleep(3)
             elif hit >= 500:
                 monstro_vida -= 3 * arma.dano
-                print(f"Você causou {3 * arma.dano} de dano!!")
+                print(f"{azul}Você causou {3 * arma.dano} de dano!!{fim}")
                 time.sleep(1)
             else:
-                print(f'Você errou!!')
+                print(f'{miss}Você errou!!{fim}')
                 time.sleep(1)
         if atk == "4":
             hit_monstro = 100
@@ -128,22 +134,23 @@ def luta(minion, arma, armadura):
             time.sleep(2)
         elif hit_monstro >= 900:
             player_vida -= dano * 2
-            print(f'Tá maluco!!!! o {monstro_raca} meteu um CRITÃO KKKKKK\n'
-                  f'O Inimigo te jantou com {dano * 2} de dano!')
+            print(f'\033[30;41mTá maluco!!!!\033[m {vermelho}o {monstro_raca} meteu um CRITÃO KKKKKK\n'
+                  f'O Inimigo te jantou com {dano * 2} de dano!{fim}')
             time.sleep(2.5)
         elif hit_monstro >= 400:
             player_vida -= dano
-            print(f'O Inimigo te causou {dano} de dano!')
+            print(f'{vermelho}O Inimigo te causou {dano} de dano!{fim}')
             time.sleep(1.5)
         elif hit_monstro < 400:
-            print('O Inimigo errou o ataque!')
+            print(f'{miss}O Inimigo errou o ataque!{fim}')
             time.sleep(1.5)
-        print(f'--Sua vida restante é: {player_vida}\n--Vida restante do {monstro_raca} é: {monstro_vida}')
+        print(f'\033[92m--Sua vida restante é: {player_vida}\033[m\n'
+              f'\033[91m--Vida restante do {monstro_raca} é: {monstro_vida}\033[m')
     if player_vida > 0:
-        print(f"Você conseguiu!! solou o {monstro_raca}")
+        print(f"\033[30;102mVocê conseguiu!! solou o {monstro_raca}\033[m")
         return 1
     else:
-        print("Você foi solado e o resto é história")
+        print("\033[30;41mVocê foi solado e o resto é história\033[m")
         return 2
 
 
@@ -173,6 +180,10 @@ def luta_femi(minion, arma, armadura):
         'Um beijão de cinema daqueles....'
 
     ]
+    azul = '\033[34m'
+    vermelho = '\033[31m'
+    miss = '\033[37m'
+    fim = '\033[m'
     monstro_vida = minion.vida
     dano = minion.dano
     monstro_raca = minion.raca
@@ -180,8 +191,8 @@ def luta_femi(minion, arma, armadura):
     print(f'Seu oponente é uma {monstro_raca} louca pra meter a mão na tua cara!\n'
           f'Ela possui {monstro_vida} de vida e {dano} de ataque!')
     time.sleep(1.5)
-    print(f'Seu equipamento é:\nArma: {arma.nome} com dano de {arma.dano}\n'
-          f'Armadura: {armadura.nome} com vida de {armadura.vida}, sua vida total é: {player_vida}')
+    print(f'Seu equipamento é:\nArma: \033[30;43m{arma.nome}\033[m com dano de {arma.dano}\n'
+          f'Armadura: \033[30;43m{armadura.nome}\033[m com vida de {armadura.vida}, sua vida total é: {player_vida}')
     time.sleep(1.5)
     while player_vida > 0 and monstro_vida > 0:
         atk = input("Qual ataque você quer usar?\n"
@@ -196,43 +207,45 @@ def luta_femi(minion, arma, armadura):
             hit = random.randint(0, 1000)
             if hit >= 900:
                 monstro_vida -= 1 * arma.dano * 2
-                print(f"Foi efetivo pra caralho!! {1 * arma.dano * 2} de dano! Ela não esperava nunca isso")
+                print(f"\033[100;91mFoi efetivo pra caralho!!\033[m {1 * arma.dano * 2} de dano! "
+                      f"Ele não esperava nunca isso")
                 time.sleep(2)
             elif hit >= 100:
                 monstro_vida -= 1 * arma.dano
-                print(f"Você causou {1 * arma.dano} de dano!!")
+                print(f"{azul}Você causou {1 * arma.dano} de dano!!{fim}")
                 time.sleep(1)
             else:
-                print(f'Você errou!!')
+                print(f'{miss}Você errou!!{fim}')
         if atk == "2":
             print(f'Você tentou dar um {hit_medio[alea5()]}...')
             time.sleep(1.5)
             hit = random.randint(0, 1000)
             if hit >= 900:
                 monstro_vida -= 2 * arma.dano * 2
-                print(f"Acabou o brinquedo pow, da não... deu {2 * arma.dano * 2} de dano nessa vagaba... F")
+                print(f"\033[100;91mAcabou o brinquedo pow\033[m da não... deu {2 * arma.dano * 2} de dano "
+                      f"nesse viado... F")
                 time.sleep(2)
             elif hit >= 300:
                 monstro_vida -= 2 * arma.dano
-                print(f"Você causou {2 * arma.dano} de dano!!")
+                print(f"{azul}Você causou {2 * arma.dano} de dano!!{fim}")
                 time.sleep(1)
             else:
-                print(f'Você errou!!')
+                print(f'{miss}Você errou!!{fim}')
         if atk == "3":
             print(f'Você tentou dar um {hit_forte[alea5()]}...')
             time.sleep(1.5)
             hit = random.randint(0, 1000)
             if hit >= 900:
                 monstro_vida -= 3 * arma.dano * 2
-                print(f"Eita porra... É valendo fazenda?? \n"
-                      f"Tu só meteu {3 * arma.dano * 2} de dano nessa quenga... precisava disso?")
+                print(f"\033[40;31mEita porra... É valendo fazenda??\033[m \n"
+                      f"Tu só meteu {3 * arma.dano * 2} de dano na bunda desse viado... precisava disso?")
                 time.sleep(3)
             elif hit >= 500:
                 monstro_vida -= 3 * arma.dano
-                print(f"Você causou {3 * arma.dano} de dano!!")
+                print(f"{azul}Você causou {3 * arma.dano} de dano!!{fim}")
                 time.sleep(1)
             else:
-                print(f'Você errou!!')
+                print(f'{miss}Você errou!!{fim}')
                 time.sleep(1)
         if atk == "4":
             hit_monstro = 100
@@ -244,24 +257,25 @@ def luta_femi(minion, arma, armadura):
             time.sleep(2)
         elif hit_monstro >= 900:
             player_vida -= dano * 2
-            print(f'Tá maluco!!!! A {monstro_raca} meteu um CRITÃO KKKKKK\n'
-                  f'A {monstro_raca} te jantou com {dano * 2} de dano!')
+            print(f'\033[30;41mTá maluco!!!!\033[m {vermelho}A {monstro_raca} meteu um CRITÃO KKKKKK\n'
+                  f'A {monstro_raca} te jantou com {dano * 2} de dano!{fim}')
             time.sleep(2.5)
         elif hit_monstro >= 400:
             player_vida -= dano
-            print(f'A {monstro_raca} te causou {dano} de dano!')
+            print(f'{vermelho}A {monstro_raca} te causou {dano} de dano!{fim}')
             time.sleep(1.5)
         elif hit_monstro < 400:
-            print(f'A {monstro_raca} errou o ataque!')
+            print(f'{miss}A {monstro_raca} errou o ataque!{fim}')
             time.sleep(1.5)
-        print(f'--Sua vida restante é: {player_vida}\n--Vida restante da {monstro_raca} é: {monstro_vida}')
+        print(f'\033[93m--Sua vida restante é: {player_vida}\033[m\n'
+              f'\033[91m--Vida restante da {monstro_raca} é: {monstro_vida}\033[m')
         time.sleep(2)
     if player_vida > 0:
-        print(f"Você conseguiu!! solou a {monstro_raca}")
+        print(f"\033[30;102mVocê conseguiu!! solou a {monstro_raca}\033[m")
         time.sleep(2)
         return 1
     else:
-        print("Você foi solado e o resto é história")
+        print("\033[30;41mVocê foi solado e o resto é história\033[m")
         time.sleep(2)
         return 2
 

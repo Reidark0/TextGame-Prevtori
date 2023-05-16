@@ -46,18 +46,20 @@ armaduras = [
     Armadura('Cueca de couro', 15)
 ]
 
-caminhos = ['Rua deserta',
-            'Ponte',
-            'Caverna',
-            'Viela escura',
-            'Mata fechada',
-            'Igreja'
+caminhos = [
+    'Rua deserta',
+    'Ponte',
+    'Caverna',
+    'Viela escura',
+    'Mata fechada',
+    'Igreja'
 ]
 
-mortes_jogador = ['Te Quebrou na porrada',
-                  'Te partiu no meio',
-                  'Te deu uma facada e saiu correndo',
-                  'Mordeu sua virilha',
-                  'Te bateu bem no ovo direito',
-                  'Te deu um olhar 43 intankavél'
+mortes_jogador = [
+    'Te Quebrou na porrada',
+    'Te partiu no meio',
+    'Te deu uma facada e saiu correndo',
+    'Mordeu sua virilha',
+    'Te bateu bem no ovo direito',
+    'Te deu um olhar 43 intankavél'
 ]

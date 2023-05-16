@@ -10,20 +10,25 @@ Prevtori = Mobs('Prevtori', 2, 10)
 CavernaMan = Mobs('Criatura', 2, 20)
 CavernaMan_Puto = Mobs('Criatura puta da cara', 4, 25)
 
+cor_item = '\033[30;43m'
+cor_titulo = '\033[30;107m'
 
 arma_nivel = 0
 armadura_nivel = 0
-print(f'Seu equipamento inicial são {armaduras[armadura_nivel].nome} e '
-      f'{armas[arma_nivel].nome} que dão bonus de {armaduras[armadura_nivel].vida} de vida '
+print(f'Você está começando uma nova Aventura!\n\n Pelo que entendi você perdeu a memoria e está em um mundo estranho.')
+input('aperte Enter para continuar.')
+
+print(f'Seu equipamento inicial são \033[30;43m{armaduras[armadura_nivel].nome}\033[m e '
+      f'\033[30;43m{armas[arma_nivel].nome}\033[m que dão bonus de {armaduras[armadura_nivel].vida} de vida '
       f'e {armas[arma_nivel].dano} de dano!')
 print('Digite apenas o número desejado pra evitar quebrar o jogo e ter q recomeçar :)')
 time.sleep(2.5)
 
 # Primeira parte -------------------------------------------------------------------------------------------------------
-
-print('-----PRIMEIRA PARTE------')
-print('*** Você acorda meio tonto...***')
+input('aperte Enter para continuar.')
+print(f'{cor_titulo}-----PRIMEIRA PARTE------\033[m')
 time.sleep(1.5)
+print('*** Você acorda meio tonto...***')
 print('-Qual é a de menos? Bicho fresco - disse um homem alto, grisalho e quem sabe afrescado'
       '\n-Tá com sono?')
 print('1- Eu estou perdido, você pode me ajudar?'
@@ -47,13 +52,15 @@ print('-Agora vaza!')
 print('***Qual direção seguir?*** \n1- Esquerda\n2- Direita\n ')
 dec1 = input('Digite 1 ou 2:\n ')
 if dec1 == '1':
+    print(f'Você é curioso e decide explorar o mapa, mas ao inves de encontrar algo útil...')
+    time.sleep(1.5)
     creep1 = monstros_easy[alea5()]
-    print(f'***Você encontrou um {creep1.raca}!!!!')
+    print(f'***Você encontrou um {creep1.raca}!!!\nEle não tá nem ai e já vem com a guarda armada!')
     confronto1 = luta(creep1, armas[arma_nivel], armaduras[armadura_nivel])
     if confronto1 == 1:
         print(f'***Voce matou o {creep1.raca}'
               f', mas encontrou um caminho sem saída... '
-              f'Pelo menos você conseguiu pegar o jeans do {creep1.raca}!')
+              f'Pelo menos você conseguiu pegar o {cor_item}jeans\033[m do {creep1.raca}!')
         time.sleep(1.5)
         print(f'***Você tem que voltar e continuar por outro caminho')
         armadura_nivel += 1
@@ -84,8 +91,8 @@ if dec2 == '2':
     if perigo1 == '1':
         confronto_impo1 = luta(matador1, armas[arma_nivel], armaduras[armadura_nivel])
         if confronto_impo1 == 1:
-            print('Caralho, eu acho que tu tá de hack, mas como esse jogo não tem segurança nenhuma pega ai:\n'
-                  'VOCÊ ENCONTROU UM FUCKING REVOLVER!')
+            print(f'Caralho, eu acho que tu tá de hack, mas como esse jogo não tem segurança nenhuma pega ai:\n'
+                  f'{cor_item}VOCÊ ENCONTROU UM FUCKING REVOLVER!\033[m')
             arma_nivel += 4
         elif confronto_impo1 == 2:
             print('Eu te avisei... vai tomar um reset de trouxa tbm')
@@ -105,7 +112,8 @@ time.sleep(1.5)
 
 # Segunda parte --------------------------------------------------------------------------------------------------------
 
-print('-----SEGUNDA PARTE------')
+print(f'{cor_titulo}-----SEGUNDA PARTE------\033[m')
+input('aperte Enter para continuar.')
 time.sleep(1.5)
 print('-Você ai! - Berra um velho acabado igual maracuja de gaveta\n'
       '-Onde você pensa que vai? essa é a minha cabana!')
@@ -190,7 +198,8 @@ while velho_vivo is True:
 
 # Terceira parte -------------------------------------------------------------------------------------------------------
     time.sleep(1)
-    print('-----TERCEIRA PARTE------')
+    print(f'{cor_titulo}-----TERCEIRA PARTE------\033[m')
+    input('aperte Enter para continuar.')
     time.sleep(2)
 # Rua Deserta
     completo = False
@@ -231,7 +240,7 @@ while velho_vivo is True:
                     print('Você vê o corpo dele sem vida e Pensa sozinho:\n'
                           'Como foi fácil acabar com ele...\n')
                     time.sleep(1.5)
-                    print('*** Você encontra um... ' + armas[1].nome + '!!!, sua nova arma!!')
+                    print(f'*** Você encontra um... {cor_item}{armas[1].nome}!!!\033[m, sua nova arma!!')
                     print('Você não vê mais nada de útil nesse prédio e volta para a rua...')
                     arma_nivel += 1
                     indecisao -= 1
@@ -307,7 +316,7 @@ while velho_vivo is True:
                     time.sleep(1.5)
                     print('Você encontrou uma armadura melhor!!')
                     armadura_nivel += 1
-                    print(f'Agora você está vestindo: {armaduras[armadura_nivel].nome} '
+                    print(f'Agora você está vestindo:{cor_item}{armaduras[armadura_nivel].nome}\033[m '
                           f'com um bônus de {armaduras[armadura_nivel].vida} de vida! ')
                     time.sleep(2.5)
                     print('Você volta a porta e perceb que ela na verdade é apenas uma pintura na parede...\n'
@@ -353,12 +362,14 @@ while velho_vivo is True:
             if prev_final == '2':
                 print('Você começa se despir e o velho começa a falar de uma ponte\n')
                 time.sleep(1.5)
-                print('Quando você termina de tirar a roupa o velho avança pega a sua roupa e desaparece!\n'
-                      'Você consegiu descobrir o próximo passo, mas agora está sem armadura :(\n'
-                      'VELHO FILHA DA PUTA!')
+                print(f'Quando você termina de tirar a roupa o velho avança pega a sua roupa e desaparece!\n'
+                      f'Você consegiu descobrir o próximo passo, mas agora está vestindo {cor_item}Trapos\033[m :(\n'
+                      f'VELHO FILHA DA PUTA!')
                 time.sleep(2)
                 print('Você segue o caminho que aquele corno do caralho falou e encontra uma ponte.')
+                time.sleep(2)
                 armadura_nivel = 0
+                break
             if prev_final == '1':
                 luta_prev = luta(Prevtori, armas[arma_nivel], armaduras[armadura_nivel])
                 if luta_prev == 1:
@@ -392,7 +403,8 @@ if velho_vivo is False:
     time.sleep(1.5)
     arma_nivel += 1
     armadura_nivel += 1
-    print(f'***E você encontrou {armas[arma_nivel].nome} e {armaduras[armadura_nivel].nome}!\n'
+    print(f'***E você encontrou{cor_item}{armas[arma_nivel].nome}\033[m e '
+          f'{cor_item}{armaduras[armadura_nivel].nome}!\033[m\n'
           f'Valeu a pena passar o Velho! ')
     time.sleep(1.5)
     print('Bom, hora de ir! É melhor do que ficar aqui parado e virar um velho louco!\n'
@@ -401,8 +413,8 @@ if velho_vivo is False:
     
 # Quarta parte ---------------------------------------------------------------------------------------------------------
 
-print('-----QUARTA PARTE------')
-time.sleep(2)
+print(f'{cor_titulo}-----QUARTA PARTE------\033[m')
+input('aperte Enter para continuar.')
 # Ponte
 print('Você entra na Ponte')
 time.sleep(1.5)
@@ -487,7 +499,7 @@ while completo1 is False:
                   'Essa foi fácil, apesar de arriscadíssimo!')
             time.sleep(2)
             arma_nivel += 1
-            print(f'***Você encontrou uma {armas[arma_nivel].nome} em baixo de um dos Pneus, que Sorte')
+            print(f'***Você encontrou uma {cor_item}{armas[arma_nivel].nome}\033[m em baixo de um dos Pneus, que Sorte')
             carro2 = True
             time.sleep(1.5)
         if ajud == '2':
@@ -517,7 +529,8 @@ while completo1 is False:
               'Você precisa de alguma coisa para quebrar o vidro! ')
         time.sleep(1.5)
         if arma_nivel >= 1:
-            print(f'***Você usa sua {armas[arma_nivel].nome} para arrebentar o vidro sem enrolação e recupera...')
+            print(f'***Você usa sua {cor_item}{armas[arma_nivel].nome}\033[m para arrebentar o vidro '
+                  f'sem enrolação e recupera...')
             time.sleep(1.5)
             print('Um amuleto? oque será que ele faz?')
             time.sleep(2)
@@ -543,7 +556,7 @@ while completo1 is False:
             else:
                 print(f'Você acabou com o {guerreiro2.raca} e encontrou uma armadura!!')
                 armadura_nivel += 1
-                print(f'Sua armadura agora é uma {armaduras[armadura_nivel].nome}!')
+                print(f'Sua armadura agora é uma {cor_item}{armaduras[armadura_nivel].nome}\033[m!')
                 time.sleep(1.5)
                 carro5 = True
         if dec6 == '2':
@@ -554,8 +567,8 @@ time.sleep(3)
 
 # Quinta parte ---------------------------------------------------------------------------------------------------------
 
-print('-----QUINTA PARTE------')
-
+print(f'{cor_titulo}-----QUINTA PARTE------\033[m')
+input('aperte Enter para continuar.')
 # Caverna
 print('Você acorda em uma Caverna e não sabe nem pra que lado tá o teto...')
 time.sleep(1.5)
@@ -617,9 +630,9 @@ while caverna is False:
         if luta == 1:
             print('Você consegue vencer a criatura que agora você examina e...')
             time.sleep(2)
-            print('E vê que é uma capivara enorme... bem, antes ela do que eu!')
+            print('E vê que é uma capivara enorme... bom, antes ela do que eu!')
             time.sleep(2)
-            print(f'Você que ela é estilosa e decide surrupiar a {armaduras[armadura_nivel].nome} '
+            print(f'Você vê que ela é estilosa e decide surrupiar a {cor_item}{armaduras[armadura_nivel].nome}\033[m '
                   f'que ela está vestindo!')
             armadura_nivel += 1
             time.sleep(2)
@@ -646,7 +659,7 @@ while caverna is False:
 print('***Você está fora da caverna!')
 print('To be continue')
 
-
+'''
 def missao(local_zero):
     drop = 0
 
@@ -697,3 +710,4 @@ def missao(local_zero):
 # Final verdadeiro
 # Quantas missões antes do Final verdadeiro?
 # Prevtori ajuda você na batalha final?
+'''
